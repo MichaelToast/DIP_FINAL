@@ -58,6 +58,18 @@ def high_freq_energy_ratio(img_blurred, img_static):
 
     return float(high_freq_mag(img_blurred) / high_freq_mag(img_static))
 
+###################################################################
+# Blur Creation
+###################################################################
+def apply_blur(img, kernel):
+    return cv2.filter2D(img, -1, kernel)
+    
+
+kernel_size = 20
+kernel_base = np.zeros((kernel_size, kernel_size))
+
+
+
 
 def main():
     # For each of the images
@@ -66,6 +78,23 @@ def main():
         img = cv2.imread(f'{base_image_path}\\{i}')
         image_title = i.split(".")[0]
         image_extention = i.split(".")[1]
+
+        # MAKING A VERITCAL KERNEL
+        veritcal_kernel = np.copy(kernel_base)
+        veritcal_kernel[:, int((kernel_size - 1)/2)] = np.ones(kernel_size) # fill the middle with 0's
+        veritcal_kernel /= kernel_size # normalize
+
+        blurred_img = apply_blur(img, veritcal_kernel)
+        cv2.imwrite( f"{output_image_path}\\{image_title}_blurred_vertical_size_{kernel_size}.{image_extention}", blurred_img)
+
+        # MAKING A HORIZONTAL KERNEL
+        horizontal_kernel = np.copy(kernel_base)
+        horizontal_kernel[int((kernel_size - 1)/2), :] = np.ones(kernel_size) # fill the middle with 0's
+        horizontal_kernel /= kernel_size # normalize
+
+        blurred_img = apply_blur(img, horizontal_kernel)
+        cv2.imwrite( f"{output_image_path}\\{image_title}_blurred_horizontal_size_{kernel_size}.{image_extention}", blurred_img)
+
 
         
 
