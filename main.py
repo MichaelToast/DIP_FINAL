@@ -1,4 +1,4 @@
-
+import sys
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -65,17 +65,17 @@ def apply_blur(img, kernel):
     return cv2.filter2D(img, -1, kernel)
     
 
-kernel_size = 20
-kernel_base = np.zeros((kernel_size, kernel_size))
+def main(kernel_size):
+    kernel_size = kernel_size
+    kernel_base = np.zeros((kernel_size, kernel_size))  
 
-
-
-
-def main():
     # For each of the images
     for i in image_names:
         print(i)
-        img = cv2.imread(f'{base_image_path}\\{i}')
+        image_path = f'{base_image_path}\\{i}'
+        img = cv2.imread(image_path)
+        if img is None:
+            raise FileNotFoundError(f"Could not read input image: {image_path}")
         image_title = i.split(".")[0]
         image_extention = i.split(".")[1]
 
@@ -105,8 +105,10 @@ def main():
 
 
         
-        
+kernel_size = 30
+if len(sys.argv) > 1:
+    kernel_size = int(sys.argv[1])
+    print(kernel_size)
 
-
-
-main()
+    
+main(kernel_size = kernel_size)

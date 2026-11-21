@@ -10,7 +10,7 @@ Circle:
 https://www.kaggle.com/datasets/nonsakhoo/directional-motion-blur-minimal-v1?select=MADE_minimal_dataset
 
 ### Set Up: 
-env_variables.py - Enviornment variables for where to get the input and output images, and what datasets to use. 
+Copy `env_variables.example.py` to `env_variables.py` and update the input/output paths and image names for your machine. The local `env_variables.py` is ignored by Git so each contributor can keep their own paths.
 
 #### Static Michaelsons Contrast
 Used or motion blur to calculate contrast lost. (Modilation Transfer) = C_blurred/C_static
