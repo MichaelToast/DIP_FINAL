@@ -1,1 +1,6 @@
 __pycache__
+Final_Input_Images/*
+!Final_Input_Images/.gitkeep
+Final_Output_Images/*
+!Final_Output_Images/.gitkeep
+env_variables.py
